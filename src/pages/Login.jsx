@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-
-import Logo from "../assets/Amazon_logo.svg.webp";
+import { useNavigate } from "react-router-dom";
 
 import LoginError from "../components/LoginError";
+import Header from "../components/Header";
 
 const Login = () => {
   // title
@@ -13,6 +12,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showError, setShowError] = useState(false);
+  const navigate = useNavigate();
 
   const handleContinue = () => {
     if (email.length > 0) {
@@ -20,17 +20,17 @@ const Login = () => {
     }
   };
 
-  const handleSignin = () => {};
+  const handleSignin = () => {
+    if (password.length > 3) {
+      navigate("/address");
+    }
+    setShowError(true);
+    setPassword("");
+  };
 
   return (
     <>
-      <header>
-        <div className="w-full px-1 py-4 flex justify-center items-center">
-          <Link to="/" className="cursor-pointer w-[6.5rem]">
-            <img src={Logo} alt="amazon" className="object-cover" />
-          </Link>
-        </div>
-      </header>
+      <Header />
 
       {showError && <LoginError />}
 
