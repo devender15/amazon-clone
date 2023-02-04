@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import Loading from "../assets/loading.gif";
+
 import LoginError from "../components/LoginError";
 import Header from "../components/Header";
 
@@ -12,6 +14,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showError, setShowError] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleContinue = () => {
@@ -22,6 +25,10 @@ const Login = () => {
 
   const handleSignin = () => {
     if (password.length > 3) {
+      setTimeout(() => {
+        setLoading(true);
+      }, 5000)
+      setLoading(false);
       navigate("/address");
     }
     setShowError(true);
