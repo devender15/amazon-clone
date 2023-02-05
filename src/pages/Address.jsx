@@ -156,7 +156,7 @@ const Address = () => {
               }}
               required
             >
-              <option value="--" selected="" disabled="">
+              <option value="--" disabled="">
                 Select Country
               </option>
               {countries?.map((country, idx) => {
